@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 requires = ["setuptools>=80", "wheel"]
 
 [project]
-authors = [{name = "Denise Case"}] # TODO: Change to YOUR name (ownership matters)
+authors = [{name = "Dan Miller"}] 
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.12",
@@ -33,10 +33,10 @@ dependencies = [ # fmt: off
 ]  # fmt: on
 
 [project.urls]
-"Bug Tracker" = "https://github.com/denisecase/applied-ml-template/issues"
-Documentation = "https://denisecase.github.io/applied-ml-template/"
-Homepage = "https://github.com/denisecase/applied-ml-template"
-Repository = "https://github.com/denisecase/applied-ml-template"
+"Bug Tracker" = "https://github.com/DMill31/applied-ml-miller/issues"
+Documentation = "https://dmill31.github.io/applied-ml-miller/"
+Homepage = "https://github.com/DMill31/applied-ml-miller"
+Repository = "https://github.com/DMill31/applied-ml-miller"
 
 [project.optional-dependencies]
 dev = [
