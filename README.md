@@ -2,21 +2,12 @@
 
 ## About this Repository
 
-Starter files for the example labs:
+This repository contains the beginner folers and files for Applied Machine Learning projects.  
+For week 1, the project can be found at:
 
-- notebooks/example01 folder
-- notebooks/example02 folder
+- notebooks/project01/ml01.ipynb
 
-## Folders for Projects
-
-Each project will be completed in its own folder.
-
-- notebooks/project01 folder:
-  - ml01.ipynb - COMPLETE THIS
-  - ml01.py - working script with just the code
-  - README.md - instructions - modify this to present your lab project
-
----
+Project 1 focuses on creating a Linear Regression model using California housing data.
 
 ## WORKFLOW 1. Set Up Machine
 
@@ -29,7 +20,7 @@ Complete each step in the following guide and verify carefully.
 
 ## WORKFLOW 2. Set Up Project
 
-After verifying your machine is set up, set up a new Python project by copying this template.
+After verifying your machine is set up, set up a new Python project.
 Complete each step in the following guide.
 
 - [SET UP PROJECT](./SET_UP_PROJECT.md)
@@ -56,6 +47,11 @@ uv run python --version
 source .venv/bin/activate
 ```
 
+Lastly, while in VS Code, it is important that we have our correct interpreter.
+1. Press Ctrl+Shift+P
+2. Search for "Python: Select Interpreter"
+3. Choose the Interpreter for the local .venv
+4. 
 ---
 
 ## WORKFLOW 3. Daily Workflow
@@ -138,12 +134,6 @@ If this works, your project is ready! If not, check:
 - Are you in the right folder? (All terminal commands are to be run from the root project folder.)
 - Did you run the full `uv sync --extra dev --extra docs --upgrade` command?
 - Are there any error messages? (ask for help with the exact error)
-
-## Update this README as you work
-
-Add commands to run additional scripts as you work through the course (update the path and file name as needed).
-
----
 
 ### 3.5 Git add-commit-push to GitHub
 
