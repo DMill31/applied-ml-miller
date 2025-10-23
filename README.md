@@ -2,12 +2,24 @@
 
 ## About this Repository
 
-This repository contains the beginner folers and files for Applied Machine Learning projects.  
+This repository contains the beginner folders and files for Applied Machine Learning projects.  There will be consistent updates regarding future projects.
+
+## Project 1
+
 For week 1, the project can be found at:
 
 - notebooks/project01/ml01.ipynb
 
-Project 1 focuses on creating a Linear Regression model using California housing data.
+Project 1 focuses on creating a Linear Regression model using the California housing dataset from sklearn.
+- Visualizations are created to show relationships between variables.
+- Two predictors are chosen from the variables to train the model.
+- Afterwards, we evaluate the model using the calculated metrics: R^2, MAE, and RMSE.
+
+
+To run the project:
+```shell
+uv run python notebooks/project01/ml01.ipynb
+```
 
 ## WORKFLOW 1. Set Up Machine
 
@@ -51,7 +63,7 @@ Lastly, while in VS Code, it is important that we have our correct interpreter.
 1. Press Ctrl+Shift+P
 2. Search for "Python: Select Interpreter"
 3. Choose the Interpreter for the local .venv
-4. 
+
 ---
 
 ## WORKFLOW 3. Daily Workflow
