@@ -12,6 +12,10 @@
 !.vscode/extensions.json
 !.vscode/settings.json
 
+# Labs
+notebooks/example01/lab1_starter_example.ipynb
+notebooks/example02/lab2_starter.ipynb
+
 # ----------------------------------------
 # macOS and Windows system files
 # ----------------------------------------
