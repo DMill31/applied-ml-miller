@@ -201,7 +201,7 @@ data_frame.head(10)
 </table>
 </div>
 
-Check data for missing values and show data types
+### **Check data for missing values and show data types**
 
 ```python
 print(data_frame.isnull().sum())
@@ -306,14 +306,14 @@ df_y = data_frame[target]
 
 ## **Section 4. Train a Linear Regression Model**
 
-Split the data by calling train_test_split()
+### **Split the data by calling train_test_split()**
 
 ```python
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.2, random_state=42)
 ```
 
-Create and train the Linear Regression Model
+### **Create and train the Linear Regression Model**
 
 ```python
 # Create a linear regression model
@@ -330,7 +330,7 @@ Lastly, make predictions for the test set
 y_pred = model.predict(X_test)
 ```
 
-Create reports of R^2, MAE, and RMSE
+### **Create reports of R^2, MAE, and RMSE**
 
 Coefficient of Determination (R^2) - This tells you how well the model explains the variation in the target variable. A value close to 1 means the model fits the data well; a value close to 0 means the model doesn’t explain the variation well.
 ```python
@@ -338,7 +338,7 @@ Coefficient of Determination (R^2) - This tells you how well the model explains 
 r2 = r2_score(y_test, y_pred)
 print(f"R^2 Score: {r2:.2f}")
 ```
-R^2 Score: 0.46
+**R^2 Score: 0.46**
 
 Mean Absolute Error (MAE) - This is the average of the absolute differences between the predicted values and the actual values. A smaller value means the model’s predictions are closer to the actual values.
 ```python
@@ -346,7 +346,7 @@ Mean Absolute Error (MAE) - This is the average of the absolute differences betw
 mae = mean_absolute_error(y_test, y_pred)
 print(f"Mean Absolute Error: {mae:.2f}")
 ```
-Mean Absolute Error: 0.62
+**Mean Absolute Error: 0.62**
 
 Root Mean Squared Error (RMSE) - This is the square root of the average of the squared differences between the predicted values and the actual values. It gives a sense of how far the predictions are from the actual values, with larger errors having more impact.
 ```python
@@ -354,4 +354,4 @@ Root Mean Squared Error (RMSE) - This is the square root of the average of the s
 rmse = mean_squared_error(y_test, y_pred)
 print(f"Root Mean Squared Error: {rmse:.2f}")
 ```
-Root Mean Squared Error: 0.70
+**Root Mean Squared Error: 0.70**
