@@ -157,3 +157,104 @@ plt.show()
 ```
 
 ![count plot](image-3.png)
+
+Handle the missing values by filling them with median or mode 
+
+```python
+# Impute missing values for age with median
+titanic["age"] = titanic["age"].fillna(titanic["age"].median())
+
+# Fill missing values for embark_town with mode
+titanic["embark_town"] = titanic["embark_town"].fillna(titanic["embark_town"].mode()[0])
+```
+
+Create new features and convert categorical data to numeric
+
+```python
+# Create a new feature 'family_size'
+titanic["family_size"] = titanic["sibsp"] + titanic["parch"] + 1
+
+# Convert categorical data to numeric
+titanic["sex"] = titanic["sex"].map({"male": 0, "female": 1})
+titanic["embarked"] = titanic["embarked"].map({"C": 0, "Q": 1, "S": 2})
+
+# Create a binary feature for 'alone'
+titanic["alone"] = titanic["alone"].astype(int)
+```
+
+## **Section 3. Feature Selection and Justification**
+
+Select the input features and the target and define X and y
+
+```python
+# Create feature inputs X and target y
+X = titanic[["age", "fare", "pclass", "sex", "family_size"]]
+y = titanic["survived"]
+```
+
+## **Section 4. Splitting**
+
+Split the data into training and testing sets using the basic split and the stratified split
+
+```python
+# Create training and testing sets using train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=123)
+```
+
+```python
+# Create stratified train/test split
+splitter = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=123)
+
+for train_indices, test_indices in splitter.split(X, y):
+    X_train_strat = X.iloc[train_indices]
+    X_test_strat = X.iloc[test_indices]
+    y_train_strat = y.iloc[train_indices]
+    y_test_strat = y.iloc[test_indices]
+```
+
+Compare the results of the splits
+
+```python
+# Compare Basic splits and Stratified splits
+
+print("Original Class Distribution:\n", X["pclass"].value_counts(normalize=True))
+
+print("\nBasic Split Train Set Class Distribution:\n", X_train["pclass"].value_counts(normalize=True))
+print("Basic Split Test Set Class Distribution:\n", X_test["pclass"].value_counts(normalize=True))
+
+print("\nStratified Split Train Set Class Distribution:\n", X_train_strat["pclass"].value_counts(normalize=True))
+print("Stratified Split Test Set Class Distribution:\n", X_test_strat["pclass"].value_counts(normalize=True))
+```
+
+Original Class Distribution:
+ pclass
+3    0.551066
+1    0.242424
+2    0.206510
+Name: proportion, dtype: float64
+
+Basic Split Train Set Class Distribution:
+ pclass
+3    0.557584
+1    0.233146
+2    0.209270
+Name: proportion, dtype: float64
+Basic Split Test Set Class Distribution:
+ pclass
+3    0.525140
+1    0.279330
+2    0.195531
+Name: proportion, dtype: float64
+
+Stratified Split Train Set Class Distribution:
+ pclass
+3    0.561798
+1    0.227528
+2    0.210674
+Name: proportion, dtype: float64
+Stratified Split Test Set Class Distribution:
+ pclass
+3    0.508380
+1    0.301676
+2    0.189944
+Name: proportion, dtype: float64
