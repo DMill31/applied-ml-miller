@@ -1,89 +1,67 @@
-# Project 01
+# Project 1
+# Miller California Housing Price Prediction
 
-## Overview
-Businesses and organizations often need to understand the relationships between different factors to make better decisions.
-For example, a company may want to predict the fuel efficiency of a car based on its weight and engine size or estimate home prices based on square footage and location.
-Regression analysis helps identify and quantify these relationships between numerical features, providing insights that can be used for forecasting and decision-making.
-
-This project demonstrates your ability to apply regression modeling techniques to a real-world dataset. You will:
-- Load and explore a dataset.
-- Choose and justify features for predicting a target variable.
-- Train a regression model and evaluate performance.
-- Compare multiple regression approaches.
-- Document your work in a structured Jupyter Notebook.
-
-## Dataset 
-Housing Prices Dataset (Predict home values based on features like square footage and location)  
-- We use the built-in dataset from scikit-learn:  
-   - `from sklearn.datasets import fetch_california_housing`  
-- Additional dataset available on Kaggle:  
-   - [Kaggle Housing Prices](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)  
-
-## Python Library for Machine Learning: scikit-learn
-We use scikit-learn, built on NumPy, SciPy, and matplotlib
-   - Read more at <https://scikit-learn.org/>
-   - Scikit-learn supports classification, regression, and clustering.
-   - This project applies regression.
-
-
-## Professional Python Setup and Workflow
-We follow professional Python practices. 
-Full instructions are available at <https://github.com/denisecase/pro-analytics-02/>. 
-
-
-**Important:** VS Code + Pylance may fail to recognize installed packages in Jupyter notebooks.  
-See the above guides for troubleshooting and solutions.  
+## Project Overview
+This project focuses on creating a Linear Regression model using the California housing dataset from sklearn.
 
 ---
 
-## Project Outline
-Machine learning projects follow a structured approach.
-We will use this approach throughout the course. 
+## Steps
 
-Start your notebook professionally with:
-- a single top-level title
-- your name (or alias)
-- the date
-- a brief introduction that describes the problem and the dataset.
-- Import the external Python libraries used (e.g., pandas, numpy, matplotlib, seaborn, sklearn, etc.)
+### 1. Imports
+Numerous python libraries were needed, including pandas, seaborn, and lots from sklearn
 
-Present your work in clearly numbered second-level and third-level headings
+### 2. Load and Explore Data
 
-### Section 1. Load and Explore the Data
-- 1.1 Load the dataset and display the first 10 rows.
-- 1.2 Check for missing values and display summary statistics.
+### 2.1 Load the Dataset
+The dataset can be found in scikit-learn, so we only needed to use the function we had already imported.
 
-Analysis: What do you notice about the dataset? Are there any data issues?
+### 2.2 Check for Missing Values
+Lucky for us, no values were missing from the dataset
 
-### Section 2. Visualize Feature Distributions
-- 2.1 Create histograms, boxplots, and scatterplots.
-- 2.2 Identify patterns or anomalies in feature distributions.
+### 3. Visualize Feature Distributions
+In this section, multiple charts and graphs were created to help us see any possible relationships between the features.
+Histograms, boxenplots, and scatter plots can be found in the notebook.
 
-Analysis: What patterns or anomalies do you see? Do any features stand out?
+### 4. Feature Selection
+At this point, we've seen the feature relationships, so it's time to choose our target feature as well as our predictors
+Predictors:
+- MedInc
+- AveRooms
+Target:
+- MedHouseVal
 
-### Section 3. Feature Selection and Justification
-- 3.1 Choose two input features for predicting the target.
-- 3.2 Justify your selection with reasoning.
+### 5. Training
+Now we create and train the linear regression model
 
-Analysis: Why did you choose these features? How might they impact predictions?
+### 5.1 Split the Data
+We split the dataset into training and test sets, in this notebook we are going with an 80/20 split
 
-### Section 4. Train a Linear Regression Model
-- 4.1 Define X (features) and y (target).
-- 4.2 Train a Linear Regression model using Scikit-Learn.
-- 4.3 Report R^2, MAE, RMSE.
+### 5.2 Train the Model
+We use the .fit() function to easily train the model on the training sets already created
 
-Analysis: How well did the model perform? Any surprises in the results?
-
-See [EXAMPLE_ANALYSIS](./EXAMPLE_ANALYSIS.md) for more.
+### 5.3 Reports
+In this section we calculate R^2, MAE, and RMSE to see how well our model performs.
+Functions are already available for calculating these values so we simply need to call them.
 
 ---
+## How to Run the Project
 
-## README.md (Required)
+### 1. Open the Notebook
+This project's notebook can be found at:
 
-Include a professional README.md. Include:
-- a personalized title
-- an introduction to your project
-- a clickable link to your notebook file.
-- Instructions on how to set up your virtual environment and run your notebook locally.
-   
-If starting with an assignment README, remove the parts you do not need to present your project.
+notebooks/project01/ml01.ipynb
+
+[notebook](https://github.com/DMill31/applied-ml-miller/blob/main/notebooks/project01/ml01.ipynb)
+
+### 2. Activate the Virtual Environment & Select Kernel
+In the terminal, run:
+
+```shell
+.\.venv\Scripts\activate
+```
+
+Once the virtual environment is up, at the top of the notebook select the kernel that goes with it
+
+### 3. Run the Notebook
+Either select the 'Run All' button at the top of the notebook or run the notebook cell by cell
