@@ -52,6 +52,8 @@ This project's notebook can be found at:
 
 notebooks/project01/ml01.ipynb
 
+[notebook](https://github.com/DMill31/applied-ml-miller/blob/main/notebooks/project01/ml01.ipynb)
+
 ### 2. Activate the Virtual Environment & Select Kernel
 In the terminal, run:
 
