@@ -226,35 +226,39 @@ print("\nStratified Split Train Set Class Distribution:\n", X_train_strat["pclas
 print("Stratified Split Test Set Class Distribution:\n", X_test_strat["pclass"].value_counts(normalize=True))
 ```
 
-Original Class Distribution:
- pclass
-3    0.551066
-1    0.242424
-2    0.206510
-Name: proportion, dtype: float64
+    Original Class Distribution:
+     pclass
+    3    0.551066
+    1    0.242424
+    2    0.206510
+    Name: proportion, dtype: float64
 
-Basic Split Train Set Class Distribution:
- pclass
-3    0.557584
-1    0.233146
-2    0.209270
-Name: proportion, dtype: float64
-Basic Split Test Set Class Distribution:
- pclass
-3    0.525140
-1    0.279330
-2    0.195531
-Name: proportion, dtype: float64
+    Basic Split Train Set Class Distribution:
+     pclass
+    3    0.557584
+    1    0.233146
+    2    0.209270
+    Name: proportion, dtype: float64
 
-Stratified Split Train Set Class Distribution:
- pclass
-3    0.561798
-1    0.227528
-2    0.210674
-Name: proportion, dtype: float64
-Stratified Split Test Set Class Distribution:
- pclass
-3    0.508380
-1    0.301676
-2    0.189944
-Name: proportion, dtype: float64
+    Basic Split Test Set Class Distribution:
+     pclass
+    3    0.525140
+    1    0.279330
+    2    0.195531
+    Name: proportion, dtype: float64
+
+    Stratified Split Train Set Class Distribution:
+     pclass
+    3    0.561798
+    1    0.227528
+    2    0.210674
+    Name: proportion, dtype: float64
+
+    Stratified Split Test Set Class Distribution:
+     pclass
+    3    0.508380
+    1    0.301676
+    2    0.189944
+    Name: proportion, dtype: float64
+
+By comparing the two types of splits we can see that they have very similar distributions, but for this case the basic split gave slightly closer results to the original.
