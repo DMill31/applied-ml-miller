@@ -63,7 +63,7 @@ nav:
   - Home: index.md
   - Project 01:
       - Overview: project01/README.md
-      - Example Analysis: project01/EXAMPLE_ANALYSIS.md
+      - Analysis: project01/EXAMPLE_ANALYSIS.md
   - Project 02:
       - Overview: project02/README.md
       - Analysis: project02/ANALYSIS.md
