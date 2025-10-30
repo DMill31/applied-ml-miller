@@ -11,14 +11,30 @@ For week 1, the project can be found at:
 - notebooks/project01/ml01.ipynb
 
 Project 1 focuses on creating a Linear Regression model using the California housing dataset from sklearn.
-- Visualizations are created to show relationships between variables.
-- Two predictors are chosen from the variables to train the model.
+- Visualizations are created to show relationships between features.
+- Two predictors are chosen from the features to train the model.
 - Afterwards, we evaluate the model using the calculated metrics: R^2, MAE, and RMSE.
 
 
 To run the project:
 ```shell
 uv run python notebooks/project01/ml01.ipynb
+```
+
+## Project 2
+
+For week 2, the project can be found at:
+
+- notebooks/project02/ml02_miller.ipynb
+
+Project 2 focuses on exploring the data from seaborn's Titanic dataset.
+- Visualizations are created to show relationships between features.
+- Through feature engineering, new features are made, and missing values are handled.
+- Different ways of splitting the data are explored.
+
+To run the project:
+```shell
+uv run python notebooks/project02/ml02_miller.ipynb
 ```
 
 ## WORKFLOW 1. Set Up Machine
