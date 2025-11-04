@@ -37,6 +37,23 @@ To run the project:
 uv run python notebooks/project02/ml02_miller.ipynb
 ```
 
+## Project 3
+
+For week 3, the project can be found at:
+
+- notebooks/project03/ml03_miller.ipynb
+
+Project 3 focuses on exploring different types of classification models
+- Decision Trees with confusion matrices are created
+- SVC with visuals showing support vectors
+- A Neural Network Decision Surface is made
+- A Summary is then presented to discuss the differences between the models
+
+To run the project:
+```shell
+uv run python notebooks/project03/ml03_miller.ipynb
+```
+
 ## WORKFLOW 1. Set Up Machine
 
 Proper setup is critical.
