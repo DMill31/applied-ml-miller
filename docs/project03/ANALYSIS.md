@@ -205,3 +205,58 @@ y2_test_pred = tree_model2.predict(X2_test)
 print("Results for Decision Tree on test data (Case 2 - age):")
 print(classification_report(y2_test, y2_test_pred))
 ```
+
+    Results for Decision Tree on training data (Case 2 - age):
+                   precision    recall  f1-score   support
+
+               0       0.68      0.92      0.78       439
+               1       0.69      0.29      0.41       273
+
+        accuracy                           0.68       712
+       macro avg       0.68      0.61      0.60       712
+    weighted avg       0.68      0.68      0.64       712
+
+    Results for Decision Tree on test data (Case 2 - age):
+                   precision    recall  f1-score   support
+
+               0       0.63      0.89      0.74       110
+               1       0.50      0.17      0.26        69
+
+        accuracy                           0.61       179
+       macro avg       0.57      0.53      0.50       179
+    weighted avg       0.58      0.61      0.55       179
+
+```python
+# Case 3
+# Predict on training data
+y3_pred = tree_model3.predict(X3_train)
+print("Results for Decision Tree on training data (Case 3 - age & family_size):")
+print(classification_report(y3_train, y3_pred))
+
+# Predict on test data
+y3_test_pred = tree_model3.predict(X3_test)
+print("Results for Decision Tree on test data (Case 3 - age & family_size):")
+print(classification_report(y3_test, y3_test_pred))
+```
+
+    Results for Decision Tree on training data (Case 3 - age & family_size):
+                   precision    recall  f1-score   support
+
+               0       0.77      0.90      0.83       439
+               1       0.77      0.56      0.65       273
+
+        accuracy                           0.77       712
+       macro avg       0.77      0.73      0.74       712
+    weighted avg       0.77      0.77      0.76       712
+
+    Results for Decision Tree on test data (Case 3 - age & family_size):
+                   precision    recall  f1-score   support
+
+               0       0.64      0.75      0.69       110
+               1       0.45      0.33      0.38        69
+
+        accuracy                           0.59       179
+       macro avg       0.55      0.54      0.54       179
+    weighted avg       0.57      0.59      0.57       179
+
+## **4.4 Report Confusion Matrix (as a heatmap)**
