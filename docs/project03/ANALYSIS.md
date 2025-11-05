@@ -156,8 +156,6 @@ tree_model3 = DecisionTreeClassifier()
 tree_model3.fit(X3_train, y3_train)
 ```
 
-## **4.3 Predict and Evaluate Model Performance**
-
 For each case, predictions are made and the classification report is shown
 
 ```python
@@ -259,4 +257,78 @@ print(classification_report(y3_test, y3_test_pred))
        macro avg       0.55      0.54      0.54       179
     weighted avg       0.57      0.59      0.57       179
 
-## **4.4 Report Confusion Matrix (as a heatmap)**
+We create a confusion matrix for each case
+
+```python
+# Create a confusion matrix for test predictions of Case 1
+cm1 = confusion_matrix(y1_test, y1_test_pred)
+
+# Plot confusion matrix as heatmap
+sns.heatmap(cm1, annot=True, cmap="Blues")
+plt.title("Confusion Matrix - Case 1: Alone")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.show()
+```
+
+![DT-CM-Case1](image.png)
+
+```python
+# Create a confusion matrix for test predictions of Case 2
+cm2 = confusion_matrix(y2_test, y2_test_pred)
+
+# Plot confusion matrix as heatmap
+sns.heatmap(cm2, annot=True, cmap="Blues")
+plt.title("Confusion Matrix - Case 2: Age")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.show()
+```
+
+![DT-CM-Case2](image-1.png)
+
+```python
+# Create a confusion matrix for test predictions of Case 3
+cm3 = confusion_matrix(y3_test, y3_test_pred)
+
+# Plot confusion matrix as heatmap
+sns.heatmap(cm3, annot=True, cmap="Blues")
+plt.title("Confusion Matrix - Case 3: Age & Family Size")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.show()
+```
+
+![DT-CM-Case3](image-2.png)
+
+Finally the Decision Trees are plotted
+
+```python
+# Plot Decision Tree for Case 1
+fig = plt.figure(figsize=(12, 6))
+plot_tree(tree_model1, feature_names=X1.columns, class_names=["Not Survived", "Survived"], filled=True) # type: ignore
+plt.title("Decision Tree - Case 1: Alone")
+plt.show()
+```
+
+![DT-Plot-Case1](notebooks/project03/tree_case1_alone.png)
+
+```python
+# Plot Decision Tree for Case 2
+fig = plt.figure(figsize=(12, 6))
+plot_tree(tree_model2, feature_names=X2.columns, class_names=["Not Survived", "Survived"], filled=True) # type: ignore
+plt.title("Decision Tree - Case 2: Age")
+plt.show()
+```
+
+![DT-Plot-Case2](notebooks/project03/tree_case2_age.png)
+
+```python
+# Plot Decision Tree for Case 3
+fig = plt.figure(figsize=(16, 8))
+plot_tree(tree_model3, feature_names=X3.columns, class_names=["Not Survived", "Survived"], filled=True) # type: ignore
+plt.title("Decision Tree - Case 3: Age & Family Size")
+plt.show()
+```
+
+![DT-Plot-Case3](notebooks/project03/tree_case3_age_family.png)
