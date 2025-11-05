@@ -155,3 +155,53 @@ tree_model2.fit(X2_train, y2_train)
 tree_model3 = DecisionTreeClassifier()
 tree_model3.fit(X3_train, y3_train)
 ```
+
+## **4.3 Predict and Evaluate Model Performance**
+
+For each case, predictions are made and the classification report is shown
+
+```python
+# Case 1
+# Predict on training data
+y1_pred = tree_model1.predict(X1_train)
+print("Results for Decision Tree on training data (Case 1 - alone):")
+print(classification_report(y1_train, y1_pred))
+
+# Predict on test data
+y1_test_pred = tree_model1.predict(X1_test)
+print("Results for Decision Tree on test data (Case 1 - alone):")
+print(classification_report(y1_test, y1_test_pred))
+```
+
+    Results for Decision Tree on training data (Case 1 - alone):
+                   precision    recall  f1-score   support
+
+               0       0.69      0.69      0.69       439
+               1       0.50      0.51      0.51       273
+
+        accuracy                           0.62       712
+       macro avg       0.60      0.60      0.60       712
+    weighted avg       0.62      0.62      0.62       712
+
+    Results for Decision Tree on test data (Case 1 - alone):
+                   precision    recall  f1-score   support
+
+               0       0.71      0.65      0.68       110
+               1       0.51      0.58      0.54        69
+
+        accuracy                           0.63       179
+       macro avg       0.61      0.62      0.61       179
+    weighted avg       0.64      0.63      0.63       179
+
+```python
+# Case 2
+# Predict on training data
+y2_pred = tree_model2.predict(X2_train)
+print("Results for Decision Tree on training data (Case 2 - age):")
+print(classification_report(y2_train, y2_pred))
+
+# Predict on test data
+y2_test_pred = tree_model2.predict(X2_test)
+print("Results for Decision Tree on test data (Case 2 - age):")
+print(classification_report(y2_test, y2_test_pred))
+```
