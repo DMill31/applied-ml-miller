@@ -12,8 +12,6 @@ This project explores the difference in performance between three classifiers: D
 
 ```python
 # Imports
-import warnings
-
 from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
 import numpy as np
@@ -332,3 +330,170 @@ plt.show()
 ```
 
 ![DT-Plot-Case3](tree_case3_age_family.png)
+
+## **Section 5. Compare Alternative Models (SVC, NN)**
+
+Now it's time to create the other models, starting with SVC
+
+First create the model, then train, predict, and print a classification report for each case
+
+```python
+# Case 1: SVC using "alone"
+
+svc_model1 = SVC()
+svc_model1.fit(X1_train, y1_train)
+y1_svc_pred = svc_model1.predict(X1_test)
+
+print("Results for SVC on test data (Case 1 - alone):")
+print(classification_report(y1_test, y1_svc_pred))
+```
+
+    Results for SVC on test data (Case 1 - alone):
+                   precision    recall  f1-score   support
+
+               0       0.71      0.65      0.68       110
+               1       0.51      0.58      0.54        69
+
+        accuracy                           0.63       179
+       macro avg       0.61      0.62      0.61       179
+    weighted avg       0.64      0.63      0.63       179
+
+```python
+# Case 2: SVC using "age"
+
+svc_model2 = SVC()
+svc_model2.fit(X2_train, y2_train)
+y2_svc_pred = svc_model2.predict(X2_test)
+
+print("Results for SVC on test data (Case 2 - age):")
+print(classification_report(y2_test, y2_svc_pred))
+```
+
+    Results for SVC on test data (Case 2 - age):
+                   precision    recall  f1-score   support
+
+               0       0.63      0.98      0.77       110
+               1       0.71      0.07      0.13        69
+
+        accuracy                           0.63       179
+       macro avg       0.67      0.53      0.45       179
+    weighted avg       0.66      0.63      0.52       179
+
+```python
+# Case 3: SVC using "age" and "family_size"
+
+svc_model3 = SVC()
+svc_model3.fit(X3_train, y3_train)
+y3_svc_pred = svc_model3.predict(X3_test)
+
+print("Results for SVC on test data (Case 3 - age and family_size):")
+print(classification_report(y3_test, y3_svc_pred))
+```
+
+    Results for SVC on test data (Case 3 - age and family_size):
+                  precision    recall  f1-score   support
+
+               0       0.63      0.98      0.77       110
+               1       0.71      0.07      0.13        69
+
+        accuracy                           0.63       179
+       macro avg       0.67      0.53      0.45       179
+    weighted avg       0.66      0.63      0.52       179
+
+Now it's time to create the visuals of the support vectors for each case
+
+```python
+# Visualize support vectors for Case 1
+
+# Create groups based on survival
+survived_alone = X1_test.loc[y1_test == 1, "alone"]
+not_survived_alone = X1_test.loc[y1_test == 0, "alone"]
+
+# Create scatter plot for survived and not survived
+plt.figure(figsize=(8,6))
+
+plt.scatter(survived_alone, y1_test.loc[y1_test == 1], c="yellow", marker="s", label="Survived")
+plt.scatter(not_survived_alone, y1_test.loc[y1_test == 0], c="cyan", marker="^", label="Not Survived")
+
+# Overlay support vectors
+# Check if the model has support_vectors_
+if hasattr(svc_model1, "support_vectors_"):
+    # Get the X values of the support vectors
+    support_x = svc_model1.support_vectors_[:, 0]
+    # Plot them using a fixed Y value
+    plt.scatter(support_x, [0.5] * len(support_x), c="black", marker="+", s=100,label="Support Vectors")
+
+# Add labels and legend
+plt.xlabel("Alone")
+plt.ylabel("Survived (0 or 1)")
+plt.title("Support Vectors - SVC (Case 1: Alone)")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+![SVC-Case1](image-3.png)
+
+```python
+# Visualize support vectors for Case 2
+
+# Create groups based on survival
+survived = X2_test.loc[y2_test == 1, "age"]
+not_survived = X2_test.loc[y2_test == 0, "age"]
+
+# Create scatter plot for survived and not survived
+plt.figure(figsize=(8,6))
+
+plt.scatter(survived, y2_test.loc[y2_test == 1], c="yellow", marker="s", label="Survived")
+plt.scatter(not_survived, y2_test.loc[y2_test == 0], c="cyan", marker="^", label="Not Survived")
+
+# Overlay support vectors
+# Check if the model has support_vectors_
+if hasattr(svc_model2, "support_vectors_"):
+    # Get the X values of the support vectors
+    support_x = svc_model2.support_vectors_[:, 0]
+    # Plot them using a fixed Y value
+    plt.scatter(support_x, [0.5] * len(support_x), c="black", marker="+", s=100, label="Support Vectors")
+
+# Add labels and legend
+plt.xlabel("Age")
+plt.ylabel("Survived (0 or 1)")
+plt.title("Support Vectors - SVC (Case 2: Age)")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+![SVC-Case2](image-4.png)
+
+```python
+# Visualize support vectors for Case 3
+
+# Create groups based on survival
+survived3 = X3_test[y3_test == 1]
+not_survived3 = X3_test[y3_test == 0]
+
+# Create scatter plot
+plt.figure(figsize=(10,7))
+
+# Plot survived
+plt.scatter(survived3["age"], survived3["family_size"], c="yellow", marker="s", label="Survived")
+
+# Plot not survived
+plt.scatter(not_survived3["age"], not_survived3["family_size"], c="cyan", marker="^", label="Not Survived")
+
+# Overlay support vectors
+if hasattr(svc_model3, "support_vectors_"):
+    support_vectors = svc_model3.support_vectors_
+    plt.scatter(support_vectors[:, 0], support_vectors[:, 1], c="black", marker="+", s=100, label="Support Vectors")
+
+# Add labels and legend
+plt.xlabel("Age")
+plt.ylabel("Family Size")
+plt.title("Support Vectors - SVC (Case 3: Age and Family Size)")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+![SVC-Case3](image-5.png)
