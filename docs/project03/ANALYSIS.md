@@ -189,6 +189,8 @@ print(classification_report(y1_test, y1_test_pred))
        macro avg       0.61      0.62      0.61       179
     weighted avg       0.64      0.63      0.63       179
 
+---
+
 ```python
 # Case 2
 # Predict on training data
@@ -222,6 +224,8 @@ print(classification_report(y2_test, y2_test_pred))
        macro avg       0.57      0.53      0.50       179
     weighted avg       0.58      0.61      0.55       179
 
+---
+
 ```python
 # Case 3
 # Predict on training data
@@ -254,6 +258,8 @@ print(classification_report(y3_test, y3_test_pred))
         accuracy                           0.59       179
        macro avg       0.55      0.54      0.54       179
     weighted avg       0.57      0.59      0.57       179
+
+---
 
 We create a confusion matrix for each case
 
@@ -358,6 +364,8 @@ print(classification_report(y1_test, y1_svc_pred))
        macro avg       0.61      0.62      0.61       179
     weighted avg       0.64      0.63      0.63       179
 
+---
+
 ```python
 # Case 2: SVC using "age"
 
@@ -379,6 +387,8 @@ print(classification_report(y2_test, y2_svc_pred))
        macro avg       0.67      0.53      0.45       179
     weighted avg       0.66      0.63      0.52       179
 
+---
+
 ```python
 # Case 3: SVC using "age" and "family_size"
 
@@ -399,6 +409,8 @@ print(classification_report(y3_test, y3_svc_pred))
         accuracy                           0.63       179
        macro avg       0.67      0.53      0.45       179
     weighted avg       0.66      0.63      0.52       179
+
+---
 
 Now it's time to create the visuals of the support vectors for each case
 
@@ -497,3 +509,92 @@ plt.show()
 ```
 
 ![SVC-Case3](image-5.png)
+
+Lastly, the Neural Network is created, but only for Case 3
+The model is created and trained, then makes predictions so the classification report can be shown
+
+```python
+# Create and Train NN for Case 3 (age & family_size)
+
+nn_model3 = MLPClassifier(hidden_layer_sizes=(50, 25, 10), solver="lbfgs", max_iter=1000, random_state=42)
+
+nn_model3.fit(X3_train, y3_train)
+
+# Predict on test data (Case 3)
+
+y3_nn_pred = nn_model3.predict(X3_test)
+
+# Print report
+print("Results for Neural Network on test data (Case 3 - age & family_size):")
+print(classification_report(y3_test, y3_nn_pred))
+```
+
+    Results for Neural Network on test data (Case 3 - age & family_size):
+                   precision    recall  f1-score   support
+
+               0       0.70      0.78      0.74       110
+               1       0.57      0.46      0.51        69
+
+        accuracy                           0.66       179
+       macro avg       0.64      0.62      0.63       179
+    weighted avg       0.65      0.66      0.65       179
+
+---
+
+A confusion matrix is also created
+
+```python
+# Create confusion matrix
+cm_nn3 = confusion_matrix(y3_test, y3_nn_pred)
+
+# Plot heatmap
+sns.heatmap(cm_nn3, annot=True, cmap="Blues")
+plt.title("Confusion Matrix - Neural Network (Case 3)")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.show()
+```
+
+![NN-CM](image-6.png)
+
+To finish things off, a Decision Surface of the Neural Network is created and shown
+
+```python
+# Get the range of oour two features
+padding = 1
+x_min, x_max = X3["age"].min()-padding,X3["age"].max()+padding
+y_min, y_max = X3["family_size"].min()-padding, X3["family_size"].max()+padding
+
+# Create a meshgrid
+xx, yy = np.meshgrid(np.linspace(x_min, x_max, 500), np.linspace(y_min, y_max, 500))
+
+# Flatten the grid arrays and prepare them for prediction
+Z = nn_model3.predict(np.c_[xx.ravel(), yy.ravel()])
+
+# Reshape the predicted results
+Z = Z.reshape(xx.shape)
+
+# Plot the decision surface showing predicted survival zones
+# Blue for 0, yellow for 1
+plt.figure(figsize=(10, 7))
+cmap_background = ListedColormap(["lightblue", "lightyellow"])
+plt.contourf(xx,yy,Z, cmap=cmap_background, alpha=0.7)
+
+# Overlay the actual test data points
+
+# Plot the passengers who didn't survive 
+plt.scatter(X3_test["age"][y3_test==0], X3_test["family_size"][y3_test==0], c="blue", marker="^", edgecolor="k", label="Not Survived")
+
+# Plot the passengers who survived
+plt.scatter(X3_test["age"][y3_test==1], X3_test["family_size"][y3_test==1], c="gold", marker="s", edgecolor="k", label="Survived")
+
+# Add labels and legend
+plt.xlabel("Age")
+plt.ylabel("Family Size")
+plt.title("Neural Network Decision Surface - Case 3")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+![NN-Decision_Surface](image-7.png)
