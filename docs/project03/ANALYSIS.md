@@ -598,3 +598,31 @@ plt.show()
 ```
 
 ![NN-Decision_Surface](image-7.png)
+
+## **Section 6. Final Thoughts & Insights**
+
+A summary table of all the models' performances is made
+
+**Summary**
+
+| Model                | Precision | Recall | F1-Score | Accuracy |
+| :------------------: | :-------- | :----- | :------- | :------- |
+| Decision Tree Case 1 | 0.51      | 0.58   | 0.54     | 0.63     |
+| Decision Tree Case 2 | 0.50      | 0.17   | 0.26     | 0.61     |
+| Decision Tree Case 3 | 0.46      | 0.35   | 0.40     | 0.59     |
+| SVC Case 1           | 0.51      | 0.58   | 0.54     | 0.63     |
+| SVC Case 2           | 0.71      | 0.07   | 0.13     | 0.63     |
+| SVC Case 3           | 0.71      | 0.07   | 0.13     | 0.63     |
+| NN Case 3            | 0.57      | 0.46   | 0.51     | 0.66     |
+
+It's clear from the summary table that the Neural Network was the model that performed the best. Although Decision Tree Case 1 had a higher recall and f1-score, Neural Network's higher precision and accuracy mean more to me. Cases 2 and 3 of the SVC models performed very similarly to each other. Case 1's data had a higher recall and f1-score with a lower Precision. When looking at all three Decision Trees, we get pretty different results for all three. Regurgitating what was said previously, Case 1 of the Decision Trees performed the best.
+
+**Challenges**
+
+The greatest challenge I had while creating this notebook was understanding the Classification Reports and Confusion Matrices simply because I don't have much experience with them. I wasn't sure which value for precison, recall, etc. I was supposed to be looking at. Originally I went with the weighted average, but went back and changed it to the row labeld '1' because I figured that all these models are about predicting survival.
+
+**Next Steps**
+
+To go further with this dataset, I would want to create models that take more than just one or two inputs, because of all the models we created, the highest accuracy was only 66%, which isn't bad but it definitely could be better. I would most likely use features like sex and class when creating those new models.
+
+Furthering my exploration of classification models, I would want to try creating models on a differently structured dataset, for instance a dataset of images rather than a table. It would also be nice to try different kinds of classification models like K-Nearest Neighbors.
