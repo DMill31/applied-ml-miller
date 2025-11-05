@@ -1,0 +1,157 @@
+# **Building a Classifier**
+**Author:** Dan Miller 
+**Date:** November 5th, 2025  
+**Objective:** Build and evaluate three classifiers using the Titanic dataset, then compare their performance across different feature sets in terms of predicting survival
+
+## **Introduction**
+
+This project explores the difference in performance between three classifiers: Decision Tree, Support Vector Machine, and Neural Network. These classifiers will be made on the Titanic dataset to predict the feature 'survived'. First, the data will be explored and there will be feature engineering done. After that, each classifier will be made individually on three separate feature sets. After all three classifiers are made and compared, there will be a summary at the end to discuss the findings.
+
+## **Section 1. Import and Inspect the Data**
+
+
+```python
+# Imports
+import warnings
+
+from matplotlib.colors import ListedColormap
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.model_selection import StratifiedShuffleSplit
+from sklearn.neural_network import MLPClassifier
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+
+```
+
+
+```python
+# Load the data
+titanic = sns.load_dataset('titanic')
+```
+
+Display the first few rows of the dataset
+
+
+```python
+print(titanic.head(5))
+```
+
+       survived  pclass  sex   age  sibsp  parch     fare  embarked  class    who  \
+    0         0       3    0  22.0      1      0   7.2500       2.0  Third    man   
+    1         1       1    1  38.0      1      0  71.2833       0.0  First  woman   
+    2         1       3    1  26.0      0      0   7.9250       2.0  Third  woman   
+    3         1       1    1  35.0      1      0  53.1000       2.0  First  woman   
+    4         0       3    0  35.0      0      0   8.0500       2.0  Third    man   
+    
+       adult_male deck  embark_town alive  alone  family_size  
+    0        True  NaN  Southampton    no  False            2  
+    1       False    C    Cherbourg   yes  False            2  
+    2       False  NaN  Southampton   yes   True            1  
+    3       False    C  Southampton   yes  False            2  
+    4        True  NaN  Southampton    no   True            1  
+
+## **Section 2. Data Exploration and Preparation**
+
+Handle the missing values by filling them with median or mode
+
+```python
+# Impute missing values for age with median
+titanic["age"] = titanic["age"].fillna(titanic["age"].median())
+
+# Fill missing values for embark_town with mode
+titanic["embark_town"] = titanic["embark_town"].fillna(titanic["embark_town"].mode()[0])
+```
+
+Create new features and convert categorical data to numeric
+
+```python
+# Create a new feature 'family_size'
+titanic["family_size"] = titanic["sibsp"] + titanic["parch"] + 1
+
+# Convert categorical data to numeric
+titanic["sex"] = titanic["sex"].map({"male": 0, "female": 1})
+titanic["embarked"] = titanic["embarked"].map({"C": 0, "Q": 1, "S": 2})
+
+# Create a binary feature for 'alone'
+titanic["alone"] = titanic["alone"].astype(int)
+```
+
+## **Feature Selection and Justification**
+
+There will be three different input cases, so we create three sets of X and y
+
+```python
+# Case 1: Feature = alone
+
+X1 = titanic[["alone"]]
+
+y1 = titanic["survived"]
+```
+
+```python
+# Case 2: Feature = age (drop if na or not available)
+
+X2 = titanic[["age"]].dropna()
+
+y2 = titanic.loc[X2.index, "survived"]
+```
+
+```python
+# Case 3: Features = age & family_size (drop if na or not available)
+
+X3 = titanic[["age", "family_size"]].dropna()
+
+y3 = titanic.loc[X3.index, "survived"]
+```
+
+## **Section 4. Train a Classification Model (Decision Tree)**
+
+First split the data, there will be a split for each case
+
+```python
+splitter1 = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=123)
+for train_idx1, test_idx1 in splitter1.split(X1, y1):
+    X1_train, X1_test = X1.iloc[train_idx1], X1.iloc[test_idx1]
+    y1_train, y1_test = y1.iloc[train_idx1], y1.iloc[test_idx1]
+```
+
+```python
+splitter2 = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=123)
+for train_idx2, test_idx2 in splitter2.split(X2, y2):
+    X2_train, X2_test = X2.iloc[train_idx2], X2.iloc[test_idx2]
+    y2_train, y2_test = y2.iloc[train_idx2], y2.iloc[test_idx2]
+```
+
+```python
+splitter3 = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=123)
+for train_idx3, test_idx3 in splitter3.split(X3, y3):
+    X3_train, X3_test = X3.iloc[train_idx3], X3.iloc[test_idx3]
+    y3_train, y3_test = y3.iloc[train_idx3], y3.iloc[test_idx3]
+```
+
+Now create the Decision Trees and train them
+
+```python
+# Case 1: Decision Tree using alone
+
+tree_model1 = DecisionTreeClassifier()
+tree_model1.fit(X1_train, y1_train)
+```
+
+```python
+# Case 2: Decision Tree using age
+
+tree_model2 = DecisionTreeClassifier()
+tree_model2.fit(X2_train, y2_train)
+```
+
+```python
+# Case 3: Decision Tree using age & family_size
+
+tree_model3 = DecisionTreeClassifier()
+tree_model3.fit(X3_train, y3_train)
+```
