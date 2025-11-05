@@ -311,7 +311,7 @@ plt.title("Decision Tree - Case 1: Alone")
 plt.show()
 ```
 
-![DT-Plot-Case1](../../notebooks/project03/tree_case1_alone.png)
+![DT-Plot-Case1](tree_case1_alone.png)
 
 ```python
 # Plot Decision Tree for Case 2
@@ -321,7 +321,7 @@ plt.title("Decision Tree - Case 2: Age")
 plt.show()
 ```
 
-![DT-Plot-Case2](../../notebooks/project03/tree_case2_age.png)
+![DT-Plot-Case2](tree_case2_age.png)
 
 ```python
 # Plot Decision Tree for Case 3
@@ -331,4 +331,4 @@ plt.title("Decision Tree - Case 3: Age & Family Size")
 plt.show()
 ```
 
-![DT-Plot-Case3](../../notebooks/project03/tree_case3_age_family.png)
+![DT-Plot-Case3](tree_case3_age_family.png)
