@@ -54,6 +54,23 @@ To run the project:
 uv run python notebooks/project03/ml03_miller.ipynb
 ```
 
+## Project 4
+
+For week 4, the project can be found at:
+
+- notebooks/project04/ml04_miller.ipynb
+
+Project 4 focuses on models used to predict a continuous target
+- Linear regression models are made for four different cases
+- Ridge regression and Elsatic Net are both created for the strongest case
+- Polynomial regression is made and visuals are created
+- A summary is presented at the end to compare the models
+
+To run the project:
+```shell
+uv run python notebooks/project04/ml04_miller.ipynb
+```
+
 ## WORKFLOW 1. Set Up Machine
 
 Proper setup is critical.
