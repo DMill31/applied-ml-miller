@@ -11,8 +11,6 @@ This project focuses on being able to predict a continuous numeric target, fare,
 Import numerous python libraries, including pandas, seaborn, and matplotlib
 
 ### 1. Import and Inspect the Data
-
-### 1.1 Import the necessary libraries
 Load the dataset using the .load_dataset() function from seaborn and display the first few rows.
 
 ### 2. Data Exploration and Preparation
