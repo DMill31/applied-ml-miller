@@ -63,3 +63,121 @@ titanic["embarked"] = titanic["embarked"].fillna(titanic["embarked"].mode()[0])
 # Map categorical variable embarked to numerical values
 titanic["embarked"] = titanic["embarked"].map({"C": 0, "Q": 1, "S": 2})
 ```
+
+## Section 3. Feature Selection & Justification
+
+There will be four different cases, so we create four sets of X and y
+
+```python
+# Case 1 - age
+
+X1 = titanic[["age"]]
+y1 = titanic["fare"]
+
+# Case 2 - family_size
+
+X2 = titanic[["family_size"]]
+y2 = titanic["fare"]
+
+# Case 3 - age & family_size
+
+X3 = titanic[["age", "family_size"]]
+y3 = titanic["fare"]
+
+# Case 4 - pclass & embarked
+X4 = titanic[["pclass", "embarked"]]
+y4 = titanic["fare"]
+```
+
+## Section 4. Train a Regression Model (Linear Regression)
+
+First we split the data
+
+```python
+# Create training and testing sets for each case
+
+X1_train, X1_test, y1_train, y1_test = train_test_split(X1, y1, test_size=0.2, random_state=123)
+
+X2_train, X2_test, y2_train, y2_test = train_test_split(X2, y2, test_size=0.2, random_state=123)
+
+X3_train, X3_test, y3_train, y3_test = train_test_split(X3, y3, test_size=0.2, random_state=123)
+
+X4_train, X4_test, y4_train, y4_test = train_test_split(X4, y4, test_size=0.2, random_state=123)
+```
+
+Next, create the models, train them, and make predictions
+
+```python
+# Create Linear Regression models and train them
+
+lr_model1 = LinearRegression().fit(X1_train, y1_train)
+lr_model2 = LinearRegression().fit(X2_train, y2_train)
+lr_model3 = LinearRegression().fit(X3_train, y3_train)
+lr_model4 = LinearRegression().fit(X4_train, y4_train)
+
+# Make predictions on the test sets
+
+y_pred_train1 = lr_model1.predict(X1_train)
+y_pred_test1 = lr_model1.predict(X1_test)
+
+y_pred_train2 = lr_model2.predict(X2_train)
+y_pred_test2 = lr_model2.predict(X2_test)
+
+y_pred_train3 = lr_model3.predict(X3_train)
+y_pred_test3 = lr_model3.predict(X3_test)
+
+y_pred_train4 = lr_model4.predict(X4_train)
+y_pred_test4 = lr_model4.predict(X4_test)
+```
+
+Finally, print the metrics for each model
+
+```python
+# Case 1 - age
+print("Case 1: Training R2:", r2_score(y1_train, y_pred_train1))
+print("Case 1: Test R2:", r2_score(y1_test, y_pred_test1))
+print("Case 1: Test RMSE:", mean_squared_error(y1_test, y_pred_test1))
+print("Case 1: Test MAE:", mean_absolute_error(y1_test, y_pred_test1))
+print("\n")
+# Case 2 - family_size
+print("Case 2: Training R2:", r2_score(y2_train, y_pred_train2))
+print("Case 2: Test R2:", r2_score(y2_test, y_pred_test2))
+print("Case 2: Test RMSE:", mean_squared_error(y2_test, y_pred_test2))
+print("Case 2: Test MAE:", mean_absolute_error(y2_test, y_pred_test2))
+print("\n")
+# Case 3 - age & family_size
+print("Case 3: Training R2:", r2_score(y3_train, y_pred_train3))
+print("Case 3: Test R2:", r2_score(y3_test, y_pred_test3))
+print("Case 3: Test RMSE:", mean_squared_error(y3_test, y_pred_test3))
+print("Case 3: Test MAE:", mean_absolute_error(y3_test, y_pred_test3))
+print("\n")
+# Case 4 - pclass & embarked
+print("Case 4: Training R2:", r2_score(y4_train, y_pred_train4))
+print("Case 4: Test R2:", r2_score(y4_test, y_pred_test4))
+print("Case 4: Test RMSE:", mean_squared_error(y4_test, y_pred_test4))
+print("Case 4: Test MAE:", mean_absolute_error(y4_test, y_pred_test4))
+```
+
+    Case 1: Training R2: 0.009950688019452314
+    Case 1: Test R2: 0.0034163395508415295
+    Case 1: Test RMSE: 1441.8455811188421
+    Case 1: Test MAE: 25.28637293162364
+
+
+    Case 2: Training R2: 0.049915792364760736
+    Case 2: Test R2: 0.022231186110131973
+    Case 2: Test RMSE: 1414.6244812277246
+    Case 2: Test MAE: 25.02534815941641
+
+
+    Case 3: Training R2: 0.07347466201590014
+    Case 3: Test R2: 0.049784832763073106
+    Case 3: Test RMSE: 1374.7601875944658
+    Case 3: Test MAE: 24.284935030470688
+
+
+    Case 4: Training R2: 0.3182447277079269
+    Case 4: Test R2: 0.3295273925136103
+    Case 4: Test RMSE: 970.0319247957374
+    Case 4: Test MAE: 21.315443001585543
+

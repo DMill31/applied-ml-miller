@@ -12,4 +12,4 @@ Projects index:
 - [**Project 01: Miller California Housing Price Prediction**](project01/README.md)
 - [**Project 02: Miller Titanic Data Features**](project02/README.md)
 - [**Project 03: Miller Building a Classifier**](project03/README.md)
-- [**Project 04: Title Here**](project04/README.md)
+- [**Project 04: Miller Predicting a Continuous Target with Regression**](project04/README.md)
