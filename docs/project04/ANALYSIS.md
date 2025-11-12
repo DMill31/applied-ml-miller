@@ -324,19 +324,24 @@ plt.show()
 | Polynomial | 0.386 | 888.6  | 18.57 |
 
 1) What features were most useful?  
+   
    Case 4 performed the best, and it used the features pclass & embarked.
 
 2) What regression model performed best?  
+   
    Of all the models, the Polynomial model performed the best.
 
 3) How did model complexity or regularization affect results?  
+   
    Increasing model complexity created models that were more accurate; however, making the models too complex (adding too many degrees to the polynomial) hurt the results.  Regularization had a similar affect.  The ridge and elastic net models performed better than normal linear regression.
 
 **Discuss Challenges**
 
 1) Was fare hard to predict? Why?  
+   
    Yes, fare was hard to predict.  This is most likely because the models were too simple.  The linear models almost all seemed to underfit, aside from Case 4.  This also brings up the fact that fare may depend on combinations of features in a nonlinear way that weren't present in this notebook.
 
 2) Did skew or outliers impact the models?  
+   
    There are a few outliers that negatively impacted model performance.  In linear regression, coefficients get pulled toward outliers, making predictions worse.  We can see in the polynomial plots of Family Size vs Fare that fare is right-skewed, which ended up causing the model to overestimate prices for large families.
 
