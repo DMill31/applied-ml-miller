@@ -218,6 +218,7 @@ poly_model = LinearRegression().fit(X_train_poly, y4_train)
 y_pred_poly = poly_model.predict(X_test_poly)
 ```
 ---
+
 Now we plot the polynomial fit for a case that only has one input (Case 2)
 
 ```python
