@@ -36,7 +36,7 @@ Case 2:
 - target: survived
 
 Case 3:
-- inpute features: age, family_size
+- input features: age, family_size
 - target: survived
 
 ### 3.2 Define X and y
