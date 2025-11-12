@@ -78,7 +78,7 @@ titanic["embarked"] = titanic["embarked"].map({"C": 0, "Q": 1, "S": 2})
 titanic["alone"] = titanic["alone"].astype(int)
 ```
 
-## **Feature Selection and Justification**
+## **Section 3. Feature Selection and Justification**
 
 There will be three different input cases, so we create three sets of X and y
 
