@@ -181,3 +181,124 @@ print("Case 4: Test MAE:", mean_absolute_error(y4_test, y_pred_test4))
     Case 4: Test RMSE: 970.0319247957374
     Case 4: Test MAE: 21.315443001585543
 
+## Section 5. Compare Alternative Models
+
+Now we'll create other regression models using Case 4
+
+First up is a Ridge Regression model
+
+```python
+# Create ridge model, train it, and make predictions
+
+ridge_model = Ridge(alpha=1.0).fit(X4_train, y4_train)
+y_pred_ridge = ridge_model.predict(X4_test)
+```
+
+Next is an Elastic Net model
+
+```python
+# Create elastic net model, train it, and make predictions
+
+elastic_model = ElasticNet(alpha=0.3, l1_ratio=0.5).fit(X4_train, y4_train)
+y_pred_elastic = elastic_model.predict(X4_test)
+```
+
+The last one is a Polynomial Regression model
+
+```python
+# Set up the poly inputs
+
+poly = PolynomialFeatures(degree=3)
+X_train_poly = poly.fit_transform(X4_train)
+X_test_poly = poly.transform(X4_test)
+
+# Use the poly inputs in the LR model
+
+poly_model = LinearRegression().fit(X_train_poly, y4_train)
+y_pred_poly = poly_model.predict(X_test_poly)
+```
+---
+Now we plot the polynomial fit for a case that only has one input (Case 2)
+
+```python
+# Plot the polynomial fit for a case with one input feature (Case 2 - family_size)
+poly2 = PolynomialFeatures(degree=3)
+X2_train_poly = poly2.fit_transform(X2_train)
+X2_test_poly = poly2.transform(X2_test)
+poly2_model = LinearRegression().fit(X2_train_poly, y2_train)
+y_pred_poly2 = poly2_model.predict(X2_test_poly)
+
+plt.scatter(X2_test, y2_test, color="blue", label="Actual")
+plt.scatter(X2_test, y_pred_poly2, color="red", label="Predicted (Poly)")
+plt.legend()
+plt.title("Polynomial Regression: Family Size vs Fare")
+plt.xlabel("Family Size")
+plt.ylabel("Fare")
+plt.show()
+```
+
+![poly-degree3](image.png)
+
+---
+
+To show how the different models performed, we print their metrics
+
+```python
+# Create function to print metrics
+def report(name, y_true, y_pred):  # noqa: D103
+    print(f"{name}:")
+    print("R2:", r2_score(y_true, y_pred))
+    print("RMSE:", mean_squared_error(y_true, y_pred))
+    print("MAE:", mean_absolute_error(y_true, y_pred))
+    print("\n")
+
+# Call report function for each model
+report("Linear", y4_test, y_pred_test4)
+report("Ridge", y4_test, y_pred_ridge)
+report("ElasticNet", y4_test, y_pred_elastic)
+report("Polynomial", y4_test, y_pred_poly)
+```
+
+    Linear:
+    R2: 0.3295273925136103
+    RMSE: 970.0319247957374
+    MAE: 21.315443001585543
+
+
+    Ridge:
+    R2: 0.33013977889602564
+    RMSE: 969.1459313418362
+    MAE: 21.285901231060585
+
+
+    ElasticNet:
+    R2: 0.3657364688023218
+    RMSE: 917.6450568234654
+    MAE: 19.82747361535895
+
+
+    Polynomial:
+    R2: 0.38583844122610345
+    RMSE: 888.5617582894122
+    MAE: 18.566016175116612
+
+Lastly, we plot another polynomial fit for the same case, but use a higher degree
+
+```python
+# Plot the polynomial fit for Case 2 but with a higher degree
+poly3 = PolynomialFeatures(degree=5)
+X2_train_poly3 = poly3.fit_transform(X2_train)
+X2_test_poly3 = poly3.transform(X2_test)
+poly3_model = LinearRegression().fit(X2_train_poly3, y2_train)
+y_pred_poly3 = poly3_model.predict(X2_test_poly3)
+
+plt.scatter(X2_test, y2_test, color="blue", label="Actual")
+plt.scatter(X2_test, y_pred_poly3, color="red", label="Predicted (Poly Degree 5)")
+plt.legend()
+plt.title("Polynomial Regression: Family Size vs Fare (Degree 5)")
+plt.xlabel("Family Size")
+plt.ylabel("Fare")
+plt.show()
+```
+
+![poly-degree5](image-1.png)
