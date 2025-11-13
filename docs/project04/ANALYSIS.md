@@ -160,25 +160,25 @@ print("Case 4: Test MAE:", mean_absolute_error(y4_test, y_pred_test4))
 
     Case 1: Training R2: 0.009950688019452314
     Case 1: Test R2: 0.0034163395508415295
-    Case 1: Test RMSE: 1441.8455811188421
+    Case 1: Test RMSE: 37.97164180172938
     Case 1: Test MAE: 25.28637293162364
 
 
     Case 2: Training R2: 0.049915792364760736
     Case 2: Test R2: 0.022231186110131973
-    Case 2: Test RMSE: 1414.6244812277246
+    Case 2: Test RMSE: 37.6114940041967
     Case 2: Test MAE: 25.02534815941641
 
 
     Case 3: Training R2: 0.07347466201590014
     Case 3: Test R2: 0.049784832763073106
-    Case 3: Test RMSE: 1374.7601875944658
+    Case 3: Test RMSE: 37.0777586646559
     Case 3: Test MAE: 24.284935030470688
 
 
     Case 4: Training R2: 0.3182447277079269
     Case 4: Test R2: 0.3295273925136103
-    Case 4: Test RMSE: 970.0319247957374
+    Case 4: Test RMSE: 31.145335522285475
     Case 4: Test MAE: 21.315443001585543
 
 ## Section 5. Compare Alternative Models
@@ -261,25 +261,25 @@ report("Polynomial", y4_test, y_pred_poly)
 
     Linear:
     R2: 0.3295273925136103
-    RMSE: 970.0319247957374
+    RMSE: 31.145335522285475
     MAE: 21.315443001585543
 
 
     Ridge:
     R2: 0.33013977889602564
-    RMSE: 969.1459313418362
+    RMSE: 31.13110873935967
     MAE: 21.285901231060585
 
 
     ElasticNet:
     R2: 0.3657364688023218
-    RMSE: 917.6450568234654
+    RMSE: 30.292656813549144
     MAE: 19.82747361535895
 
 
     Polynomial:
     R2: 0.38583844122610345
-    RMSE: 888.5617582894122
+    RMSE: 29.80875304821408
     MAE: 18.566016175116612
 
 Lastly, we plot another polynomial fit for the same case, but use a higher degree
@@ -309,19 +309,19 @@ plt.show()
 
 |  Case                      |  R2   |  RMSE  |  MAE  |
 | :------------------------: | ----: | -----: | ----: |
-| Case 1 - Age               | 0.003 | 1441   | 25.29 |
-| Case 2 - Family Size       | 0.022 | 1414   | 25.03 |
-| Case 3 - Age & Family Size | 0.050 | 1374   | 24.28 |
-| Case 4 - Pclass & Embarked | 0.330 | 970.0  | 21.32 |
+| Case 1 - Age               | 0.003 | 37.97  | 25.29 |
+| Case 2 - Family Size       | 0.022 | 37.61  | 25.03 |
+| Case 3 - Age & Family Size | 0.050 | 37.08  | 24.28 |
+| Case 4 - Pclass & Embarked | 0.330 | 31.15  | 21.32 |
 
 **Table 2 - Case 4 Alternate Models**
 
 |   Model    |  R2   |  RMSE  |  MAE  |
 | :--------: | ----: | -----: | ----: |
-| Linear     | 0.330 | 970.0  | 21.32 |
-| Ridge      | 0.330 | 969.1  | 21.29 |
-| ElasticNet | 0.366 | 917.6  | 19.83 |
-| Polynomial | 0.386 | 888.6  | 18.57 |
+| Linear     | 0.330 | 31.15  | 21.32 |
+| Ridge      | 0.330 | 31.13  | 21.29 |
+| ElasticNet | 0.366 | 30.29  | 19.83 |
+| Polynomial | 0.386 | 29.81  | 18.57 |
 
 1) What features were most useful?  
    
