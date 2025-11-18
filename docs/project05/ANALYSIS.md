@@ -173,3 +173,79 @@ df.head()
 There are 1599 samples available with 12 columns made up of 11 features and the one target.
 
 The target is quality, an integer score from 0-10, with 0 being the worst and 10 the best.
+
+## Section 2. Prepare the Data
+
+We are going to be simplify the target into three categories: low, medium, and high
+
+Then we'll convert those three categories into numeric for modeling ease: low = 0, medium = 1, high = 2
+
+```python
+# Helper function to create the quality_label column
+
+def quality_to_label(q):
+    """Convert a numeric quality score to a categorical label."""
+    if q <= 4:
+        return "low"
+    elif q <= 6:  # noqa: RET505
+        return "medium"
+    else:
+        return "high"
+
+# Helper function to create numeric column
+def quality_to_numeric(q):
+    """Convert a numeric quality score to a numeric label."""
+    if q <= 4:
+        return 0
+    elif q <= 6:  # noqa: RET505
+        return 1
+    else:
+        return 2
+
+# Call the apply() method to create the new column
+
+df["quality_label"] = df["quality"].apply(quality_to_label)
+
+df["quality_numeric"] = df["quality"].apply(quality_to_numeric)
+```
+
+## Section 3. Feature Selection and Justification
+
+
+
+As mentioned, the target will be quality, but we will be using the quality_numeric column for modeling ease.
+
+The input features will be the rest of the dataset besides quality and quality_label.
+
+Input features:
+
+- fixed acidity
+- volatile acidity
+- citric acid
+- residual sugar
+- chlorides
+- free sulfur dioxide
+- total sulfur dioxide
+- density
+- pH
+- sulphates
+- alcohol
+
+Target:
+
+- quality_numeric
+
+```python
+# Create the X and y variables for modeling
+X = df.drop(columns=["quality", "quality_label", "quality_numeric"])
+y = df["quality_numeric"]
+```
+
+## Section 4. Split the Data into Train and Test
+
+```python
+# Create the training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+```
