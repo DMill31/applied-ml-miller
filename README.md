@@ -71,6 +71,23 @@ To run the project:
 uv run python notebooks/project04/ml04_miller.ipynb
 ```
 
+## Project 5
+
+For week 5, the project can be found at:
+
+- notebooks/project05/ensemble-miller.ipynb
+
+Project 5 focuses on ensemble models ability to predict wine quality
+- Helper functions are created to clean the data easily
+- All features aside from the target are input features
+- 2 different ensemble models are created
+- A summary and conclusion are at the end to show comparisons
+
+To run the project:
+```shell
+uv run python notebooks/project05/ensemble-miller.ipynb
+```
+
 ## WORKFLOW 1. Set Up Machine
 
 Proper setup is critical.
