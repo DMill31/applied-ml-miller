@@ -13,3 +13,4 @@ Projects index:
 - [**Project 02: Miller Titanic Data Features**](project02/README.md)
 - [**Project 03: Miller Building a Classifier**](project03/README.md)
 - [**Project 04: Miller Predicting a Continuous Target with Regression**](project04/README.md)
+- [**Project 05: Miller Ensemble Maching Learning**](project05/README.md)
