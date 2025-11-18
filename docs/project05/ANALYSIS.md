@@ -249,3 +249,92 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 ```
+
+## Section 5. Evaluate Model Performance
+
+```python
+# Create a helper function to train and evaluate models
+
+def evaluate_model(name, model, X_train, y_train, X_test, y_test, results):  # noqa: N803
+    """Train and evaluate a model, storing results in a dictionary."""
+    model.fit(X_train, y_train)
+
+    y_train_pred = model.predict(X_train)
+    y_test_pred = model.predict(X_test)
+
+    train_acc = accuracy_score(y_train, y_train_pred)
+    test_acc = accuracy_score(y_test, y_test_pred)
+    train_f1 = f1_score(y_train, y_train_pred, average="weighted")
+    test_f1 = f1_score(y_test, y_test_pred, average="weighted")
+
+    print(f"\n{name} Results")
+    print("Confusion Matrix (Test):")
+    print(confusion_matrix(y_test, y_test_pred))
+    print(f"Train Accuracy: {train_acc:.4f}, Test Accuracy: {test_acc:.4f}")
+    print(f"Train F1 Score: {train_f1:.4f}, Test F1 Score: {test_f1:.4f}")
+
+    results.append(
+        {
+            "Model": name,
+            "Train Accuracy": train_acc,
+            "Test Accuracy": test_acc,
+            "Accuracy Gap": train_acc - test_acc,
+            "Train F1 Score": train_f1,
+            "Test F1 Score": test_f1,
+            "F1 Score Gap": train_f1 - test_f1
+        }
+    )
+```
+
+### Model 1: AdaBoost (200, lr=0.5)
+
+```python
+# Create empty dictionary
+
+results = []
+
+# Call evaluate_model for AdaBoost
+
+evaluate_model(
+    "AdaBoost (200, lr=0.5)",
+    AdaBoostClassifier(n_estimators=200, learning_rate=0.5, random_state=42),
+    X_train,
+    y_train,
+    X_test,
+    y_test,
+    results
+)
+```
+
+    AdaBoost (200, lr=0.5) Results
+    Confusion Matrix (Test):
+    [[  1  12   0]
+     [  2 255   7]
+     [  0  25  18]]
+    Train Accuracy: 0.8397, Test Accuracy: 0.8562
+    Train F1 Score: 0.8160, Test F1 Score: 0.8330
+
+### Model 2: Bagging
+
+```python
+# Call evaluate_model for Bagging
+
+evaluate_model(
+    "Bagging (DT, 100)",
+    BaggingClassifier(estimator=DecisionTreeClassifier(), n_estimators=100, random_state=42),
+    X_train,
+    y_train,
+    X_test,
+    y_test,
+    results
+)
+```
+
+    Bagging (DT, 100) Results
+    Confusion Matrix (Test):
+    [[  0  13   0]
+     [  0 252  12]
+     [  0  12  31]]
+    Train Accuracy: 1.0000, Test Accuracy: 0.8844
+    Train F1 Score: 1.0000, Test F1 Score: 0.8655
+
