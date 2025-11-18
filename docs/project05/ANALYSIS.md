@@ -338,3 +338,111 @@ evaluate_model(
     Train Accuracy: 1.0000, Test Accuracy: 0.8844
     Train F1 Score: 1.0000, Test F1 Score: 0.8655
 
+## Section 6. Compare Results
+
+```python
+# Create a table of results
+results_df = pd.DataFrame(results)
+
+# Print the summary
+print("\nSummary of All Models:")
+display(results_df)
+
+# Get the data ready for plotting
+
+rdf = pd.DataFrame(results)
+
+rdf["Abs Accuracy Gap"] = rdf["Accuracy Gap"].abs()
+rdf["Abs F1 Score Gap"] = rdf["F1 Score Gap"].abs()
+
+# Plot the accuracy and F1 scores for each model
+rdf.plot(
+    x="Model",
+    y=["Test Accuracy", "Test F1 Score"],
+    kind="bar",
+    color=["purple", "pink"],
+    figsize=(10, 6),
+)
+
+plt.xlabel("Model")
+plt.ylabel("Score Value")
+plt.title("Test Accuracy and F1 Score for Each Model")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Plot the gap results for each model
+
+rdf.plot(
+    x="Model",
+    y=["Abs Accuracy Gap", "Abs F1 Score Gap"],
+    kind="bar",
+    color=["red", "skyblue"],
+    figsize=(10, 6),
+)
+
+plt.xlabel("Model")
+plt.ylabel("Gap Value")
+plt.title("Accuracy and F1 Score Gaps for Each Model")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+Summary of All Models:
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
+      <th>Train Accuracy</th>
+      <th>Test Accuracy</th>
+      <th>Accuracy Gap</th>
+      <th>Train F1 Score</th>
+      <th>Test F1 Score</th>
+      <th>F1 Score Gap</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AdaBoost (200, lr=0.5)</td>
+      <td>0.839719</td>
+      <td>0.856250</td>
+      <td>-0.016531</td>
+      <td>0.815964</td>
+      <td>0.832962</td>
+      <td>-0.016998</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bagging (DT, 100)</td>
+      <td>1.000000</td>
+      <td>0.884375</td>
+      <td>0.115625</td>
+      <td>1.000000</td>
+      <td>0.865452</td>
+      <td>0.134548</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+![accuracy_f1_score](image.png)
+
+![accuracy_f1_gap](image-1.png)
