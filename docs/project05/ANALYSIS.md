@@ -446,3 +446,36 @@ Summary of All Models:
 ![accuracy_f1_score](image.png)
 
 ![accuracy_f1_gap](image-1.png)
+
+## Section 7. Conclusions and Insights
+
+While my notebook only contains AdaBoost and Bagging, my peers have created notebooks with other models.  Those notebooks can be found here: [notebook1](https://github.com/abeaderstadt/applied-ml-beaderstadt/blob/main/notebooks/project05/ensemble-beaderstadt.ipynb), [notebook2](https://github.com/BethSpornitz/ml-bethspornitz/blob/main/notebooks/project05/ensemble_bethspornitz.ipynb).
+
+**Performance Comparison**
+
+Of the two models available in this notebook, and based on test accuracy, Bagging performs the best.  While there seems to be a little bit of overfitting in Bagging as the train accuracy was 100%, its test accuracy was still higher than the AdaBoost's.  Both models performed quite well, AdaBoost had a test accuracy of 0.856 and Boosting's was 0.884.  Bagging only performed slightly better than AdaBoost, and a similar difference can be found in their F1 Scores as well.
+
+The models used in my peers' notebooks consist of Random Forest, Voting, and Gradient Boosting.  Here are the new metrics with this notebook's:
+
+| Model             | Train Accuracy | Test Accuracy | Train F1 | Test F1 | Accuracy Gap | F1 Gap |
+| :---------------: | -------------: | ------------: | -------: | ------: | -----------: | -----: |
+| Bagging           | 1.0            | 0.884         | 1.0      | 0.865   | 0.116        | 0.135  |
+| AdaBoost          | 0.840          | 0.856         | 0.816    | 0.833   | -0.017       | -0.017 |
+| Random Forest     | 1.0            | 0.888         | 1.0      | 0.866   | 0.113        | 0.134  |
+| Voting            | 0.928          | 0.850         | 0.912    | 0.832   | 0.078        | 0.079  |
+| Gradient Boosting | 0.960          | 0.856         | 0.958    | 0.841   | 0.104        | 0.117  |
+
+We can immediately see that Bagging and Random Forest have near identical metrics, and this makes sense given that they both use Decision Trees for training.  These two models also have the two highest test accuracies and f1 scores as well as the highest gaps.  The worst performing model is Voting (DT + SVM + NN) showing that in this case it is better to combine similar models rather than diverse ones.  Gradient Boosting is also a new addition, but it doesn't add much, as it wasn't the best model or the worst, it performs very similarly to AdaBoost.
+
+
+**Explanation**
+
+Bagging creates many strong and independent models in parallel then brings them all together while AdaBoost creates a sequence of dependent models.  AdaBoost tries to correct previous errors as it learns while Bagging creates many models on random samples of the data.  The strengths of Bagging that AdaBoost doesn't have would be that it uses stronger base learners and isn't strongly influenced by noise.  Gradient Boosting works similar to AdaBoost, but uses gradient descent.  It would take a deeper dive into the red wine dataset to see how messy it is, meaning if there are many outliers, just a few, or none.
+
+Voting combines diverse models (Decision Tree, SVM, and Neural Network) and averages their predictions.  With the wine dataset, we see that it did not perform as well as the other ensemble models.  What's dangerous about averaging predictions is that it only takes one of the models performing poorly to make the entire ensemble worse.  This may be the case.  
+
+Lastly, Random Forest works very similarly to Bagging, but it adds feature randomness.  Bagging uses all features when splitting while Random Forest uses a random subset of features, increasing generalization.  
+
+**Next Steps**
+
+If I was in a competition to build the best predictor, I would start with the Random Forest model and tweak the parameters.  Specifically, I'd look into limiting tree depth to fight overfitting.  I'd also look deeper into the dataset's features to see how noisy it is and if it needs extra cleaning.
